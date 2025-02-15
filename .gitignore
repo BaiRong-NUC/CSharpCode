@@ -1,0 +1,8 @@
+./.vs/
+TestEnv/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+**/bin/
+**/obj/
+**/Properties
+*.config
+*.csproj
+*.sin
