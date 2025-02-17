@@ -22,6 +22,28 @@ namespace EntryPracticeDemo
             Console.SetBufferSize(_gameWeith, _gameHeight);
         }
 
+        //打印游戏边界
+        static void _PrintGame()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            for (int i = 0; i < _gameWeith; i += 2)
+            {
+                Console.SetCursorPosition(i, 0);
+                Console.Write("■");
+                Console.SetCursorPosition(i, _gameHeight - 2);
+                Console.Write("■");
+                Console.SetCursorPosition(i, _gameHeight - 7);
+                Console.Write("■");
+            }
+            for (int i = 0; i < _gameHeight - 1; i++)
+            {
+                Console.SetCursorPosition(0, i);
+                Console.Write("■");
+                Console.SetCursorPosition(_gameWeith - 2, i);
+                Console.Write("■");
+            }
+        } 
+
         //开始游戏场景
         static void BeginGameMenue()
         {
@@ -75,6 +97,17 @@ namespace EntryPracticeDemo
                 }
             }
         }
+         
+        //游戏场景
+        static void GameScene()
+        {
+            //打印游戏边界
+            _PrintGame();
+            while (true)
+            {
+
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -92,7 +125,7 @@ namespace EntryPracticeDemo
                     //游戏场景
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("游戏场景");
+                        GameScene();
                         break;
                     //结束场景
                     case 3:
