@@ -9,11 +9,20 @@ namespace EntryPracticeDemo
     class Boss
     {
         //boss信息
-        public int[] _bossPos = { 24, 13 };
+        public int[] _bossPos = { 24, 12 };
         public int[] _bossAtkRange = { 7, 13 };
         public int _bossHp = 100;
         public string _bossIcon = "■";
         public ConsoleColor _bossColor = ConsoleColor.Green;
+    }
+    class Player
+    {
+        //玩家信息
+        public int[] _playerPos = { 6, 5 };
+        public int _playerHp = 100;
+        public string _playerIcon = "●";
+        public ConsoleColor _playerColor = ConsoleColor.Yellow;
+        public int[] _playerAtkRange = { 1, 10 };
     }
     class Program
     {
@@ -24,6 +33,8 @@ namespace EntryPracticeDemo
 
         //boss信息
         static Boss _bossInfo=new Boss();
+
+        static Player _playerInfo = new Player();
 
         //初始化游戏参数
         static void InitGame()
@@ -116,11 +127,81 @@ namespace EntryPracticeDemo
         {
             //打印游戏边界
             _PrintGame();
+
             while (true)
             {
-                Console.SetCursorPosition(_bossInfo._bossPos[0], _bossInfo._bossPos[1]);
-                Console.ForegroundColor = _bossInfo._bossColor;
-                Console.Write(_bossInfo._bossIcon);
+                //画boss
+                if (_bossInfo._bossHp > 0)
+                {
+                    Console.SetCursorPosition(_bossInfo._bossPos[0], _bossInfo._bossPos[1]);
+                    Console.ForegroundColor = _bossInfo._bossColor;
+                    Console.Write(_bossInfo._bossIcon);
+                }
+                //画玩家
+                Console.SetCursorPosition(_playerInfo._playerPos[0], _playerInfo._playerPos[1]);
+                Console.ForegroundColor = _playerInfo._playerColor;
+                Console.Write(_playerInfo._playerIcon);
+                //检测玩家输入
+                char input = Console.ReadKey(true).KeyChar;
+                //擦除之前的位置
+                Console.SetCursorPosition(_playerInfo._playerPos[0], _playerInfo._playerPos[1]);
+                Console.Write("  ");
+                //改位置
+                switch (input)
+                {
+                    case 'W':
+                    case 'w':
+                        _playerInfo._playerPos[1] -= 1;
+                        if (_playerInfo._playerPos[1] < 1)
+                        {
+                            _playerInfo._playerPos[1] = 1;
+                        }
+                        if (_playerInfo._playerPos[0] == _bossInfo._bossPos[0] && _playerInfo._playerPos[1] == _bossInfo._bossPos[1] && _bossInfo._bossHp > 0) 
+                        {
+                            _playerInfo._playerPos[1] += 1;
+                        }
+                        break;
+                    case 'S':
+                    case 's':
+                        _playerInfo._playerPos[1] += 1;
+                        if (_playerInfo._playerPos[1] >= _gameHeight - 7)
+                        {
+                            _playerInfo._playerPos[1] -= 1;
+                        }
+                        if (_playerInfo._playerPos[0] == _bossInfo._bossPos[0] && _playerInfo._playerPos[1] == _bossInfo._bossPos[1] && _bossInfo._bossHp > 0)
+                        {
+                            _playerInfo._playerPos[1] -= 1;
+                        }
+                        break;
+                    case 'A':
+                    case 'a':
+                        _playerInfo._playerPos[0] -= 2;
+                        if (_playerInfo._playerPos[0] < 2)
+                        {
+                            _playerInfo._playerPos[0] = 2;
+                        }
+                        if (_playerInfo._playerPos[0] == _bossInfo._bossPos[0] && _playerInfo._playerPos[1] == _bossInfo._bossPos[1] && _bossInfo._bossHp > 0)
+                        {
+                            _playerInfo._playerPos[0] += 2;
+                        }
+                        break;
+                    case 'D':
+                    case 'd':
+                        _playerInfo._playerPos[0] += 2;
+                        if (_playerInfo._playerPos[0]>= _gameWeith - 2)
+                        {
+                            _playerInfo._playerPos[0] -= 2;
+                        }
+                        if (_playerInfo._playerPos[0] == _bossInfo._bossPos[0] && _playerInfo._playerPos[1] == _bossInfo._bossPos[1] && _bossInfo._bossHp > 0)
+                        {
+                            _playerInfo._playerPos[0] -= 2;
+                        }
+                        break;
+                    //开始战斗
+                    case 'J':
+                    case 'j':
+                        break;
+                }
             }
         }
 
