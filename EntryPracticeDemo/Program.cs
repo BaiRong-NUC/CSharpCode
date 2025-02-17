@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 
 namespace EntryPracticeDemo
 {
+    class Boss
+    {
+        //boss信息
+        public int[] _bossPos = { 24, 13 };
+        public int[] _bossAtkRange = { 7, 13 };
+        public int _bossHp = 100;
+        public string _bossIcon = "■";
+        public ConsoleColor _bossColor = ConsoleColor.Green;
+    }
     class Program
     {
         static int _gameWeith = 50;
         static int _gameHeight = 30;
         //场景id
         static int _sceneId = 1;
+
+        //boss信息
+        static Boss _bossInfo=new Boss();
+
         //初始化游戏参数
         static void InitGame()
         {
@@ -105,7 +118,9 @@ namespace EntryPracticeDemo
             _PrintGame();
             while (true)
             {
-
+                Console.SetCursorPosition(_bossInfo._bossPos[0], _bossInfo._bossPos[1]);
+                Console.ForegroundColor = _bossInfo._bossColor;
+                Console.Write(_bossInfo._bossIcon);
             }
         }
 
