@@ -26,3 +26,5 @@
 3. **运行代码**
 
    在 IDE 中编译并运行代码示例。
+
+4. ipynb文件的浏览需要 VsCode Polyglot Notebooks 插件支持
